@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+sqlalchemy = "*"
+uvicorn = "*"
+pydantic-settings = "*"
+python-dotenv = "*"
+google-auth = "*"
+httpx = "*"
+requests = "*"
+psycopg2-binary = "*"
+docx2python = "*"
+langchain-text-splitters = "*"
+langchain-openai = "*"
+langchain-pinecone = "*"
+langchain = "*"
+mammoth = "*"
+python-docx = "*"
+python-pptx = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"
