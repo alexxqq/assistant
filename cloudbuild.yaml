@@ -1,9 +1,9 @@
 availableSecrets:
   secretManager:
     - versionName: projects/$PROJECT_ID/secrets/GOOGLE_CLIENT_ID/versions/latest
-      env: "GOOGLE_CLIENT_ID"
+      env: GOOGLE_CLIENT_ID
     - versionName: projects/$PROJECT_ID/secrets/GOOGLE_REDIRECT_URI/versions/latest
-      env: "GOOGLE_REDIRECT_URI"
+      env: GOOGLE_REDIRECT_URI
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
@@ -23,17 +23,17 @@ steps:
     args:
       - '-c'
       - |
+        echo "Starting Docker build with secrets from Secret Manager..."
         docker build \
-          --build-arg NEXT_PUBLIC_CLIENT_ID="$GOOGLE_CLIENT_ID" \
-          --build-arg NEXT_PUBLIC_REDIRECT_URI="$GOOGLE_REDIRECT_URI" \
+          --build-arg NEXT_PUBLIC_CLIENT_ID=${GOOGLE_CLIENT_ID} \
+          --build-arg NEXT_PUBLIC_REDIRECT_URI=${GOOGLE_REDIRECT_URI} \
           -t gcr.io/$PROJECT_ID/aiqa-frontend .
         docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
-  # REMOVE this redundant push step, since the image is pushed above
+
   # - name: 'gcr.io/cloud-builders/docker'
   #   args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
   #   id: push-frontend-image
-  #   waitFor: ['build-frontend-image']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -48,7 +48,6 @@ steps:
           --images=backend=gcr.io/$PROJECT_ID/aiqa
     waitFor: ['push-backend-image']
     id: create-release
-
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'bash'
     args:
@@ -58,9 +57,8 @@ steps:
           --image gcr.io/$PROJECT_ID/aiqa-frontend \
           --region=europe-central2 \
           --platform=managed \
-          --allow-unauthenticated
-    waitFor: ['build-frontend-image']
+          --allow-unauthenticated \
     id: deploy-frontend
-
+    waitFor: ['push-frontend-image']
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
