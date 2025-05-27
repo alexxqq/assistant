@@ -29,10 +29,7 @@ steps:
         CLIENT_ID=$(gcloud secrets versions access latest --secret=GOOGLE_CLIENT_ID)
         REDIRECT_URI=$(gcloud secrets versions access latest --secret=GOOGLE_REDIRECT_URI)
 
-        echo "Building frontend with secrets..."
-        docker build --build-arg NEXT_PUBLIC_CLIENT_ID="$CLIENT_ID" --build-arg NEXT_PUBLIC_REDIRECT_URI="$REDIRECT_URI" -t gcr.io/$PROJECT_ID/aiqa-frontend client
-
-        echo "Pushing image..."
+        docker build --build-arg NEXT_PUBLIC_CLIENT_ID="$CLIENT_ID" --build-arg NEXT_PUBLIC_REDIRECT_URI="$REDIRECT_URI" -t gcr.io/$PROJECT_ID/aiqa-frontend ./client
         docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
   - name: 'gcr.io/cloud-builders/docker'
