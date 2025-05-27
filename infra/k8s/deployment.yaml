@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gcr.io/plated-reducer-458308-d9/aiqa
+          image: gcr.io/plated-reducer-458308-d9/aiqa/6b37367
           ports:
             - containerPort: 8000
