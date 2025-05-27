@@ -22,6 +22,10 @@ mammoth = "*"
 python-docx = "*"
 python-pptx = "*"
 itsdangerous = "*"
+psycopg2 = "*"
+pyjwt = "*"
+pdfplumber = "*"
+python-multipart = "*"
 
 [dev-packages]
 
