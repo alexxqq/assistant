@@ -5,10 +5,8 @@ metadata:
 
 build:
   artifacts:
-    - image: gcr.io/plated-reducer-458308-d9/aiqa-backend
+    - image: gcr.io/plated-reducer-458308-d9/aiqa
       context: api
-    - image: gcr.io/plated-reducer-458308-d9/aiqa-frontend
-      context: frontend
 
 deploy:
   kubectl:

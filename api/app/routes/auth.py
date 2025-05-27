@@ -18,7 +18,7 @@ router = APIRouter(prefix='/auth',tags=['Auth'])
 async def google_auth_callback(code: Optional[str] = None , error: Optional[str] = None, db: Session = Depends(get_db)):
     try:
         if error == "access_denied":
-            return RedirectResponse(url="http://localhost:8080/login")
+            return RedirectResponse(url=f"{settings.front_host}/login")
         id_token_value = await exchange_code_for_token(code)
         
         user_info = verify_id_token(id_token_value)
@@ -28,7 +28,7 @@ async def google_auth_callback(code: Optional[str] = None , error: Optional[str]
         payload = {"sub": user.id, "email": user.email, "exp": datetime.utcnow() + timedelta(hours=1)}
         token = jwt.encode(payload, settings.secret_key, algorithm="HS256")
 
-        response = RedirectResponse(url="http://localhost:8080")
+        response = RedirectResponse(url=f"{settings.front_host}")
         response.set_cookie(
             settings.cookie_token, 
             token, 

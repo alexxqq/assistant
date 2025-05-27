@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     google_client_secret: str
     google_redirect_uri: str
 
+    front_host : str
     class Config:
         env_file = ".env"
 

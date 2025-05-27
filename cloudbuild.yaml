@@ -27,7 +27,7 @@ steps:
           --region=europe-central2 \
           --delivery-pipeline=aiqa-pipeline \
           --skaffold-file=infra/skaffold.yaml \
-          --images=backend=gcr.io/$PROJECT_ID/aiqa,frontend=gcr.io/$PROJECT_ID/aiqa-frontend
+          --images=backend=gcr.io/$PROJECT_ID/aiqa
     waitFor: ['push-backend-image']
     id: create-release
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -39,7 +39,8 @@ steps:
           --image gcr.io/$PROJECT_ID/aiqa-frontend \
           --region=europe-central2 \
           --platform=managed \
-          --allow-unauthenticated
+          --allow-unauthenticated \
+          --set-secrets NEXT_PUBLIC_CLIENT_ID=GOOGLE_CLIENT_ID:latest,NEXT_PUBLIC_REDIRECT_URI=GOOGLE_REDIRECT_URI:latest
     id: deploy-frontend
     waitFor: ['push-frontend-image']
 options:

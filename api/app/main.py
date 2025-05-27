@@ -13,7 +13,7 @@ app.add_middleware(SessionMiddleware, secret_key=settings.secret_key)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000","http://localhost:8080"],
+    allow_origins=["http://localhost:3000","http://localhost:8080", f"{settings.front_host}"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

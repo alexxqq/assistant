@@ -53,3 +53,8 @@ spec:
                 secretKeyRef:
                   name: secret-key
                   key: SECRET_KEY
+            - name: FRONT_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: frontend-host
+                  key: FRONT_HOST
