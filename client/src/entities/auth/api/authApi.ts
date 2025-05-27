@@ -1,5 +1,7 @@
+import { API } from "@/src/shared/endpoints";
+
 export const fetchUser = async () => {
-    const response = await fetch("http://localhost:8000/auth/me", {
+    const response = await fetch(API.me, {
       credentials: "include",
     });
     if (!response.ok) throw new Error("Failed to fetch user");
@@ -7,7 +9,7 @@ export const fetchUser = async () => {
 }
 
 export const logout = async () => {
-    const response = await fetch("http://localhost:8000/auth/logout", {
+    const response = await fetch(API.logout, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

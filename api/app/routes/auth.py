@@ -29,12 +29,15 @@ async def google_auth_callback(code: Optional[str] = None , error: Optional[str]
         token = jwt.encode(payload, settings.secret_key, algorithm="HS256")
 
         response = RedirectResponse(url=f"{settings.front_host}")
+        # response = RedirectResponse(url=f"http://localhost:3000")
         response.set_cookie(
             settings.cookie_token, 
             token, 
             httponly=True, 
             secure=False,
+            # secure=True,
             samesite="None",
+            # samesite="Strict",
             max_age=60 * 60
         )
 

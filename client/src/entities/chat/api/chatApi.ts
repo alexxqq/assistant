@@ -1,5 +1,7 @@
+import { API } from "@/src/shared/endpoints";
+
 export const fetchChats = async () => {
-  const response = await fetch("http://localhost:8000/chat/all_chats", {
+  const response = await fetch(API.allChats, {
     credentials: "include",
   });
   if (response.status == 404) {
@@ -16,7 +18,7 @@ export const fetchChats = async () => {
 
 export const fetchMessages = async (chatId: string) => {
   const response = await fetch(
-    `http://localhost:8000/chat/${chatId}/messages`,
+    API.chatMessages(chatId),
     {
       credentials: "include",
     }
@@ -33,7 +35,7 @@ export const fetchMessages = async (chatId: string) => {
 };
 
 export const askQuestion = async (chatId: string, question: string) => {
-  const response = await fetch(`http://localhost:8000/chat/${chatId}/ask`, {
+  const response = await fetch(API.ask(chatId), {
     method: "POST",
     credentials: "include",
     headers: {
@@ -54,7 +56,7 @@ export const askQuestion = async (chatId: string, question: string) => {
 export const uploadFile = async (file: File) => {
   const formData = new FormData();
   formData.append("file", file);
-  const response = await fetch(`http://localhost:8000/chat/upload/`, {
+  const response = await fetch(API.upload, {
     method: "POST",
     credentials: "include",
     body: formData,
@@ -68,7 +70,7 @@ export const uploadFile = async (file: File) => {
   return await response.json();
 };
 export const deleteChat = async (chatId: string) => {
-  const response = await fetch(`http://localhost:8000/chat/${chatId}`, {
+  const response = await fetch(API.deleteChat(chatId), {
     method: "DELETE",
     credentials: "include",
   });
@@ -83,7 +85,7 @@ export const deleteChat = async (chatId: string) => {
 
 export const updateChatTitle = async (chatId: string, title: string) => {
   try {
-    const response = await fetch(`http://localhost:8000/chat/${chatId}`, {
+    const response = await fetch(API.updateChat(chatId), {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
