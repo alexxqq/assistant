@@ -1,12 +1,19 @@
-apiVersion: skaffold/v2beta29
-kind: Config
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: aiqa
-build:
-  artifacts:
-    - image: gcr.io/plated-reducer-458308-d9/aiqa
-      context: api
-deploy:
-  kubectl:
-    manifests:
-      - k8s/*
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: gcr.io/YOUR_PROJECT_ID/aiqa
+          ports:
+            - containerPort: 8000
