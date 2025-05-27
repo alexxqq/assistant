@@ -30,11 +30,6 @@ steps:
           -t gcr.io/$PROJECT_ID/aiqa-frontend .
         docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
-
-  # - name: 'gcr.io/cloud-builders/docker'
-  #   args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
-  #   id: push-frontend-image
-
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
