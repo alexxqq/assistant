@@ -29,10 +29,11 @@ steps:
           -t gcr.io/$PROJECT_ID/aiqa-frontend .
         docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
-    id: push-frontend-image
-    waitFor: ['build-frontend-image']
+  # REMOVE this redundant push step, since the image is pushed above
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
+  #   id: push-frontend-image
+  #   waitFor: ['build-frontend-image']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
@@ -58,7 +59,7 @@ steps:
           --region=europe-central2 \
           --platform=managed \
           --allow-unauthenticated
-    waitFor: ['push-frontend-image']
+    waitFor: ['build-frontend-image']
     id: deploy-frontend
 
 options:
