@@ -34,7 +34,7 @@ async def google_auth_callback(code: Optional[str] = None , error: Optional[str]
             token, 
             httponly=True, 
             secure=False,
-            samesite="None",,
+            samesite="None",
             max_age=60 * 60
         )
 
