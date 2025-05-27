@@ -9,10 +9,10 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./infra/k8s/*
+      - ./k8s/*
 profiles:
   - name: target-1
     deploy:
       kubectl:
         manifests:
-          - ./infra/k8s/*
+          - ./k8s/*
