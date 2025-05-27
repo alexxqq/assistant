@@ -1,0 +1,26 @@
+steps:
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   dir: 'api'
+  #   args: ['build', '-t', 'gcr.io/$PROJECT_ID/aiqa/$SHORT_SHA', '.']
+  #   id: build-image
+
+  # - name: 'gcr.io/cloud-builders/docker'
+  #   args: ['push', 'gcr.io/$PROJECT_ID/aiqa/$SHORT_SHA']
+  #   id: push-image
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud deploy releases create aiqa-release-$SHORT_SHA \
+          --project=$PROJECT_ID \
+          --region=europe-central2 \
+          --delivery-pipeline=aiqa-pipeline \
+          --skaffold-file=infra/skaffold.yaml \
+          --images=backend=gcr.io/$PROJECT_ID/aiqa/$SHORT_SHA
+    # waitFor: ['push-image']
+    id: create-release
+
+options:
+  defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET

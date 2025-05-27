@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: aiqa
+build:
+  artifacts:
+    - image: gcr.io/plated-reducer-458308-d9/aiqa
+      context: api
+deploy:
+  kubectl:
+    manifests:
+      - k8s/*
