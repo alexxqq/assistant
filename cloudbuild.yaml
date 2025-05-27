@@ -20,19 +20,20 @@ steps:
         echo "CLIENT_ID=$CLIENT_ID" > frontend.env
         echo "REDIRECT_URI=$REDIRECT_URI" >> frontend.env
 
-  - name: 'gcr.io/cloud-builders/docker'
-    dir: 'client'
-    args:
-      - 'build'
-      - '-t'
-      - 'gcr.io/$PROJECT_ID/aiqa-frontend'
-      - '--build-arg'
-      - 'NEXT_PUBLIC_CLIENT_ID=$(grep CLIENT_ID frontend.env | cut -d= -f2-)'
-      - '--build-arg'
-      - 'NEXT_PUBLIC_REDIRECT_URI=$(grep REDIRECT_URI frontend.env | cut -d= -f2-)'
-      - '.'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: build-frontend-image
-    waitFor: ['fetch-secrets']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        CLIENT_ID=$(gcloud secrets versions access latest --secret=GOOGLE_CLIENT_ID)
+        REDIRECT_URI=$(gcloud secrets versions access latest --secret=GOOGLE_REDIRECT_URI)
+
+        echo "Building frontend with secrets..."
+        docker build --build-arg NEXT_PUBLIC_CLIENT_ID="$CLIENT_ID" --build-arg NEXT_PUBLIC_REDIRECT_URI="$REDIRECT_URI" -t gcr.io/$PROJECT_ID/aiqa-frontend client
+
+        echo "Pushing image..."
+        docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
