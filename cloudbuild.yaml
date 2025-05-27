@@ -17,19 +17,17 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     dir: 'client'
-    args:
-      [
-        'build',
-        '-t',
-        'gcr.io/$PROJECT_ID/aiqa-frontend',
-        '--build-arg',
-        'NEXT_PUBLIC_CLIENT_ID=$GOOGLE_CLIENT_ID',
-        '--build-arg',
-        'NEXT_PUBLIC_REDIRECT_URI=$GOOGLE_REDIRECT_URI',
-        '.'
-      ]
     id: build-frontend-image
     secretEnv: ['GOOGLE_CLIENT_ID', 'GOOGLE_REDIRECT_URI']
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        docker build \
+          --build-arg NEXT_PUBLIC_CLIENT_ID="$GOOGLE_CLIENT_ID" \
+          --build-arg NEXT_PUBLIC_REDIRECT_URI="$GOOGLE_REDIRECT_URI" \
+          -t gcr.io/$PROJECT_ID/aiqa-frontend .
+        docker push gcr.io/$PROJECT_ID/aiqa-frontend
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'gcr.io/$PROJECT_ID/aiqa-frontend']
