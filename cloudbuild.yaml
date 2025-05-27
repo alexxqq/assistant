@@ -59,6 +59,6 @@ steps:
           --platform=managed \
           --allow-unauthenticated \
     id: deploy-frontend
-    waitFor: ['push-frontend-image']
+    waitFor: ['build-frontend-image']
 options:
   defaultLogsBucketBehavior: REGIONAL_USER_OWNED_BUCKET
