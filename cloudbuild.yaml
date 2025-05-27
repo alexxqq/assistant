@@ -9,7 +9,7 @@ steps:
     id: push-backend-image
 
   - name: 'gcr.io/cloud-builders/docker'
-    dir: 'frontend'
+    dir: 'client'
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/aiqa-frontend', '.']
     id: build-frontend-image
 
