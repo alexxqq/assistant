@@ -14,13 +14,3 @@ deploy:
   kubectl:
     manifests:
       - ./k8s/*
-
-profiles:
-  - name: cloudrun-frontend
-    deploy:
-      cloudrun:
-        projectId: plated-reducer-458308-d9
-        region: europe-central2
-        services:
-          - name: aiqa-frontend
-            image: gcr.io/plated-reducer-458308-d9/aiqa-frontend
