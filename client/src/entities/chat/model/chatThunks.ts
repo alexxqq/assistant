@@ -31,10 +31,15 @@ export const fetchMessages = createAsyncThunk(
   async (chatId: string, { rejectWithValue }) => {
     try {
       return await chatApi.fetchMessages(chatId);
-    } catch (error : any) {
-      console.log(error)
-      console.log(error.message)
-      return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.log(error);
+        console.log(error.message);
+        return rejectWithValue(error.message);
+      } else {
+        console.log('Unknown error', error);
+        return rejectWithValue('An unknown error occurred');
+      }
     }
   }
 );

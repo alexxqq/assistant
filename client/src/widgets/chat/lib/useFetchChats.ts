@@ -15,7 +15,7 @@ export function useFetchChats() {
     if (user && (!chats || chats.length === 0)) {
       dispatch(fetchChats());
     }
-  }, [user, dispatch, chats?.length]);
+  }, [user, dispatch, chats?.length, chats]);
 
   return { chats, loading, error };
 }

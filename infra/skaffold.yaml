@@ -2,17 +2,25 @@ apiVersion: skaffold/v2beta29
 kind: Config
 metadata:
   name: aiqa
+
 build:
   artifacts:
-    - image: gcr.io/plated-reducer-458308-d9/aiqa
+    - image: gcr.io/plated-reducer-458308-d9/aiqa-backend
       context: api
+    - image: gcr.io/plated-reducer-458308-d9/aiqa-frontend
+      context: frontend
+
 deploy:
   kubectl:
     manifests:
       - ./k8s/*
+
 profiles:
-  - name: target-1
+  - name: cloudrun-frontend
     deploy:
-      kubectl:
-        manifests:
-          - ./k8s/*
+      cloudrun:
+        projectId: plated-reducer-458308-d9
+        region: europe-central2
+        services:
+          - name: aiqa-frontend
+            image: gcr.io/plated-reducer-458308-d9/aiqa-frontend

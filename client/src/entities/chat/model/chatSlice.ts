@@ -54,7 +54,7 @@ const chatSlice = createSlice({
         state.loading = false;
         state.error = action.error.message as string;
       })
-      .addCase(fetchMessages.pending, (state, action) => {
+      .addCase(fetchMessages.pending, (state) => {
         state.messagesLoading = true;
         state.error = null;
       })

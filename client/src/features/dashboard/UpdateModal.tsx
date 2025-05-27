@@ -29,7 +29,7 @@ export default function UpdateModal({chatId}: Props) {
         <DialogHeader>
           <DialogTitle>Edit chat title</DialogTitle>
           <DialogDescription>
-            Change the chat title and save when you're
+            Change the chat title and save when you are
             done.
           </DialogDescription>
         </DialogHeader>
