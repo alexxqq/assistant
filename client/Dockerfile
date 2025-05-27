@@ -1,40 +1,26 @@
-FROM node:18-alpine AS development
-
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm ci
-
-COPY . .
-
-EXPOSE 3000
-
-
-CMD ["npm", "run", "dev"]
-
 FROM node:18-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-
 RUN npm ci
 
 COPY . .
 
 RUN npm run build
 
-
 FROM node:18-alpine AS production
 
 WORKDIR /app
 
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
 
 ENV NODE_ENV=production
+ENV PORT=8080
 
-EXPOSE 3000
+EXPOSE 8080
 
-CMD ["node", "server.js"]
+CMD ["npx", "next", "start", "-p", "8080"]
