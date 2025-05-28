@@ -19,5 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 app.include_router(auth_router)
 app.include_router(chat_router)
