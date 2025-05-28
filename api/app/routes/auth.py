@@ -34,8 +34,8 @@ async def google_auth_callback(code: Optional[str] = None , error: Optional[str]
             settings.cookie_token, 
             token, 
             httponly=True, 
-            secure=False,
-            # secure=True,
+            # secure=False,
+            secure=True,
             samesite="None",
             # samesite="Strict",
             max_age=60 * 60
