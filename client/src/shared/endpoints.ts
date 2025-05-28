@@ -1,4 +1,4 @@
-const HOST: string = 'http://api.detect.uno';
+const HOST: string = 'https://api.detect.uno';
 
 enum ENDPOINTS {
   LOGOUT = '/auth/logout',
