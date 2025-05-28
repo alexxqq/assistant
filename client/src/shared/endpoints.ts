@@ -1,5 +1,4 @@
 const HOST: string = 'http://api.detect.uno';
-// const HOST: string = 'http://localhost:8000';
 
 enum ENDPOINTS {
   LOGOUT = '/auth/logout',
