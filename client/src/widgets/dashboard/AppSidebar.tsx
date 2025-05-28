@@ -52,7 +52,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupLabel>Chats</SidebarGroupLabel>
           <Link
-            href="/"
+            href="/nc"
             className="mb-2 ml-2 mt-2 block text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors duration-200"
           >
             + New chat

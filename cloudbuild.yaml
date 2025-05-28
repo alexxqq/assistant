@@ -50,7 +50,7 @@ steps:
       - |
         gcloud run deploy aiqa-frontend \
           --image gcr.io/$PROJECT_ID/aiqa-frontend \
-          --region=europe-central2 \
+          --region=us-central1 \
           --platform=managed \
           --allow-unauthenticated \
     id: deploy-frontend

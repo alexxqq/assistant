@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /me
+Disallow: /nc
+Disallow: /c
+Allow: /
+
+Sitemap: https://detect.uno/sitemap.xml

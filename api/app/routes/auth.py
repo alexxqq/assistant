@@ -28,16 +28,16 @@ async def google_auth_callback(code: Optional[str] = None , error: Optional[str]
         payload = {"sub": user.id, "email": user.email, "exp": datetime.utcnow() + timedelta(hours=1)}
         token = jwt.encode(payload, settings.secret_key, algorithm="HS256")
 
-        response = RedirectResponse(url=f"{settings.front_host}")
+        response = RedirectResponse(url=f"{settings.front_host}/nc")
         # response = RedirectResponse(url=f"http://localhost:3000")
         response.set_cookie(
             settings.cookie_token, 
             token, 
             httponly=True, 
             # secure=False,
-            secure=True,
-            samesite="None",
-            # samesite="Strict",
+            secure=True, # prod
+            # samesite="None",
+            samesite="Lax", # prod
             max_age=60 * 60
         )
 
