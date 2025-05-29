@@ -18,50 +18,53 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Next-Gen AI Chat with Contextual Intelligence | Try Now",
+  title: "Tavnix AI — Advanced Contextual AI Chat Assistant",
   description:
-    "Experience the future of AI chat with ChatNex. Our AI offers contextual intelligence for more natural and effective conversations. Start your free trial today!",
+    "Tavnix AI delivers cutting-edge contextual AI chat experiences using RAG technology. Upload documents, get intelligent responses, and enhance your productivity with seamless conversations.",
   keywords: [
-    "AI chat",
-    "artificial intelligence",
-    "contextual AI",
+    "Tavnix AI",
+    "contextual AI chat",
+    "RAG AI assistant",
     "intelligent chatbot",
+    "AI document understanding",
+    "vector search AI",
     "natural language processing",
-    "conversational AI",
-    "try now",
-    "free trial",
+    "productivity AI",
+    "AI chat assistant",
   ],
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "Next-Gen AI Chat with Contextual Intelligence | Try Now",
+    title: "Tavnix AI — Advanced Contextual AI Chat Assistant",
     description:
-      "Experience the future of AI chat with ChatNex. Our AI offers contextual intelligence for more natural and effective conversations. Start your free trial today!",
+      "Discover Tavnix AI, the next-generation AI chat assistant with powerful document understanding and contextual awareness powered by RAG and vector search.",
     type: "website",
     url: "https://detect.uno",
     images: [
       {
-        url: "https://detect.uno/favicon.ico",
+        url: "https://detect.uno/logo.png",
         width: 1200,
         height: 630,
-        alt: "ChatNex Logo",
+        alt: "Tavnix AI Logo",
       },
     ],
-    siteName: "ChatNex",
+    siteName: "Tavnix AI",
   },
   twitter: {
-    title: "Next-Gen AI Chat with Contextual Intelligence | Try Now",
+    card: "summary_large_image",
+    title: "Tavnix AI — Advanced Contextual AI Chat Assistant",
     description:
-      "Experience the future of AI chat with ChatNex. Our AI offers contextual intelligence for more natural and effective conversations. Start your free trial today!",
-    images: ["https://detect.uno/favicon.ico"],
+      "Experience smarter conversations with Tavnix AI. Upload documents, leverage vector search and RAG for context-aware AI chat.",
+    images: ["https://detect.uno/logo.png"],
+    site: "@TavnixAI",
   },
   alternates: {
     canonical: "https://detect.uno",
   },
   other: {
-    "application-name": "ChatNex",
+    "application-name": "Tavnix AI",
   },
 };
 
@@ -79,29 +82,23 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebApplication",
-              name: "ChatNex",
+              name: "Tavnix AI",
               url: "https://detect.uno/",
-              applicationCategory: "Productivity",
+              applicationCategory: "ProductivityApplication",
               operatingSystem: "Web",
               description:
-                "ChatNex is a next-gen AI assistant with contextual awareness and RAG technology. Understand documents, chat smarter, and work faster.",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD",
-                availability: "https://schema.org/OnlineOnly",
-              },
+                "Tavnix AI is an advanced AI chat assistant leveraging Retrieval-Augmented Generation (RAG) and vector search to provide context-rich, intelligent conversations and document understanding.",
               provider: {
                 "@type": "Organization",
-                name: "ChatNex",
+                name: "Tavnix AI",
                 url: "https://detect.uno/",
               },
               featureList: [
-                "Contextual understanding",
-                "Natural language processing",
-                "Document upload and analysis",
-                "Fast vector search",
-                "Secure login",
+                "Retrieval-Augmented Generation (RAG) technology",
+                "Contextual document analysis",
+                "Fast vector similarity search",
+                "Natural language understanding",
+                "Secure and seamless user experience",
               ],
             }),
           }}

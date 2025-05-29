@@ -14,7 +14,8 @@ const LandingPage: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Next-Gen AI Chat with Contextual Intelligence | Try Now</title>
+        <title>Tavnix AI — Advanced Contextual AI Chat Assistant</title>
+        <meta name="description" content="Tavnix AI offers advanced contextual AI chat powered by Retrieval-Augmented Generation (RAG). Upload your documents, get smart answers, and enhance your workflow." />
       </Head>
 
       <main className="main">
