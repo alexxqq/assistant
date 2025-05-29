@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Depends,Query
 from sqlalchemy.orm import Session
 
+import re
 from datetime import datetime
 
 from models.user import User
@@ -25,9 +26,17 @@ router = APIRouter(prefix='/chat', tags=['Chat'])
 
 ALLOWED_EXTENSIONS = ["pdf", "docx", "txt", "pptx"]
 
+def sanitize_filename_alternative(filename):
+    """Removes or replaces non-ASCII alphanumeric characters from a filename."""
+    name, ext = filename.rsplit('.', 1)
+    sanitized_name = re.sub(r'[^a-zA-Z0-9_-]+', '_', name)
+    sanitized_name = sanitized_name.encode('ascii', 'ignore').decode('ascii')
+    return f"{sanitized_name}.{ext}"
+
 def get_namespace(user_id, filename):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    return f"user_{user_id}_chat_{filename}_{timestamp}"
+    sanitized_file = sanitize_filename_alternative(filename)
+    return f"user_{user_id}_chat_{sanitized_file}_{timestamp}"
 
 def extract_text_based_on_extension(ext: str, file: UploadFile):
     match ext:

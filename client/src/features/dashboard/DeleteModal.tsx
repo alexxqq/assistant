@@ -1,12 +1,16 @@
 import { deleteChat } from '@/src/entities/chat';
 import { useAppDispatch } from '@/src/shared/redux/hooks';
+import { useRouter } from "next/navigation";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/src/shared/ui/alert-dialog'
 type Props = { chatId: string}
 
 export default function DeleteModal({chatId}: Props) {
     const dispatch = useAppDispatch();
+    const router = useRouter();
+
     const handleDeleteChat = async (chatId: string) => {
         dispatch(deleteChat(chatId));
+        router.push(`/nc`);
       };
   return (
     <AlertDialog>
